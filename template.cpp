@@ -5,11 +5,8 @@
 #include <iostream>
 using namespace std;
 
-
 //methods of Node<U>
 //U is a random data structure
-template <class U>
-Node<U> :: Node(U &d) : data(d),next(NULL),prev(NULL) {}
 template <class U>
 Node<U> :: Node(const U &d) : data(d),next(NULL),prev(NULL) {}
 template <class U>

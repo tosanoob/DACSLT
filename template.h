@@ -18,7 +18,6 @@ private:
 
     //---------------
 public:
-    Node(U&);
     Node(const U&);
     Node *tonext();
     Node *toprev();
