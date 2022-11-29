@@ -1,7 +1,6 @@
 #ifndef FUNCTION_CPP
 #define FUNCTION_CPP
 
-#include "friendfunction.h"
 #include <iomanip>
 #include <fstream>
 #include <iostream>
