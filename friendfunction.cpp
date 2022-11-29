@@ -1,16 +1,3 @@
-/* list of additional functions
-
-borrow book
-return book
-operator >> for user & books
-operator << for user & books
-file input & output for user & book & record
-
-print list of user borrowing the same book
-print list of books borrowing by a user
-
-*/
-
 #ifndef FUNCTION_CPP
 #define FUNCTION_CPP
 
@@ -46,6 +33,26 @@ void read_file(ifstream &inp, DSLK<Node<User>> &list)
     return;
 }
 
+void read_borrowlist(ifstream &inp, DSLK<Node<User>>& userlist, DSLK<Node<Sach>>& sachlist) {
+    string userid;
+    string sachid;
+    while (!inp.eof())
+    {
+        getline(inp,userid,'|');
+        getline(inp,sachid);
+        if (userid == "" || sachid == "") return; //false read file
+        try {
+            User* borrower_ptr = &find_id(userid,userlist);
+            Sach* target_ptr = &find_id(sachid,sachlist);
+            borrower_ptr->getlist().insert(target_ptr);
+            target_ptr->getlist().insert(borrower_ptr);
+        }
+        catch (int returnid) { //if not found id;
+            if (returnid == MEMBER_NOTFOUND) cout<<"error id not found";
+            else throw;
+        }
+    }
+}
 
 void write_file(ofstream &out, DSLK<Node<User>> &list)
 {
@@ -68,16 +75,13 @@ void write_file(ofstream &out, DSLK<Node<Sach>> &list)
 void save_borrowlist(ofstream &out, DSLK<Node<User>> &list) {
     Node<User>* temp = list.gethead();
     int len = list.getsize();
-    cout<<"debug trap 1\n";
     for (int i=0;i<len;i++) {
         DSLK<Node<Sach*>>& booklist = temp->getdata().getlist();
         int size = booklist.getsize();
-        cout<<"debug trap 2\n";
         if (size>0) {
             Node<Sach*>* tempptr = booklist.gethead();
             string userid = temp->getdata().getid();
-            cout<<"debug trap 3\n";
-            for (int j =0;j<len;j++) {
+            for (int j =0;j<size;j++) {
                 string bookid = tempptr->getdata()->getid();
                 out<<userid<<'|'<<bookid<<'\n';
                 tempptr=tempptr->tonext();
@@ -114,7 +118,6 @@ bool borrowbook(User& borrower, Sach& target) {
     borrower.getlist().insert(target_ptr);
     target.getlist().insert(borrower_ptr);
     target.soban--;
-    cout<<"function borrow succeed\n";
     return 1;
 }
 
@@ -124,7 +127,6 @@ bool returnbook(User& borrower, Sach& target) {
     borrower.getlist().remove(target_ptr);
     target.getlist().remove(borrower_ptr);
     target.soban++;
-    cout<<"function return succeed\n";
     return 1;
 }
 
