@@ -18,12 +18,18 @@ int main()
     read_borrowlist(inp_borrowing,userlist,sachlist);
     cout<<"read success\n";
 
-    find_id("00004",userlist).borrowlist();
     //writenew
     inp_borrowing.close();
     inp_user.close();
     inp_sach.close();
 
+    User& target = find_id("00004",userlist);
+    returnall(target);
+    userlist.remove(target);
+
+    userlist.display();
+    sachlist.display();
+/*
     ofstream out_borrowing("borrowing.txt");
     save_borrowlist(out_borrowing, userlist);
     cout<< "save borrowlist success\n";
@@ -32,7 +38,8 @@ int main()
     ofstream out_sach("sachbase.txt");
     write_file(out_sach, sachlist);
     write_file(out_user, userlist);
-    
-    cout << "writefile success\n";
+*/
+
+    cout << "test success\n";
     return 1;
 }

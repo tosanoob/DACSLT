@@ -1,6 +1,7 @@
 #ifndef FUNCTION_CPP
 #define FUNCTION_CPP
 
+#include "friendfunction.h"
 #include <iomanip>
 #include <fstream>
 #include <iostream>
@@ -129,4 +130,65 @@ bool returnbook(User& borrower, Sach& target) {
     return 1;
 }
 
+/*
+    // these function needs to be called right before any deletion
+    // call this before delete a <Sach>
+void correcting (DSLK<Node<User>>& userlist, Sach& removal) {
+    Node<User>* temp = userlist.gethead();
+    Sach* target = &removal;
+    int len = userlist.getsize();
+    for (int i =0;i<len;i++) {
+        DSLK<Node<Sach*>>& ref = temp->getdata().getlist();
+        int templen = ref.getsize();
+        if (templen > 0) {
+            ref.remove(target);
+        }
+        temp = temp->tonext();
+    }
+}
+    // call this before delete a <User>
+    // 
+void correcting (DSLK<Node<Sach>>& sachlist, User& removal) {
+    Node<Sach>* temp = sachlist.gethead();
+    User* target = &removal;
+    int len = sachlist.getsize();
+    for (int i =0;i<len;i++) {
+        DSLK<Node<User*>>& ref = temp->getdata().getlist();
+        int templen = ref.getsize();
+        if (templen > 0) {
+            ref.remove(target);
+        }
+        temp = temp->tonext();
+}
+*/
+
+//call this returnall before delete a <sach>
+void returnall (Sach& target) {
+    DSLK<Node<User*>> &userlist = target.getlist();
+    Node<User*>* temp;
+    User* borrower_ptr;
+    int size = userlist.getsize();  
+    for (int i =0;i<size;i++) {
+        temp = userlist.gethead();
+        borrower_ptr = temp->getdata();
+        returnbook(*borrower_ptr,target);
+        //force-return a book
+        //don't need to move temp->tonext(), the head will be modified itself
+    }
+}
+
+//call this returnall before delete a <user>
+void returnall (User& target) {
+    DSLK<Node<Sach*>> &sachlist = target.getlist();
+    Node<Sach*>* temp;
+    Sach* sach_ptr;
+    int size = sachlist.getsize();  
+    for (int i =0;i<size;i++) {
+        temp = sachlist.gethead();
+        sach_ptr = temp->getdata();
+        returnbook(target,*sach_ptr);
+        //force-return a book
+        //don't need to move temp->tonext(), the head will be modified itself
+    }
+}
 #endif
