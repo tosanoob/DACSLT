@@ -12,6 +12,7 @@ class Menu{
         Menu(int strnum, string a[]);
         Menu(string a, string b, string c, string d);
         ~Menu();
+        int CtrlMenu();
         void printMenu();
         void deleteMenu();
         int numberOfItem();

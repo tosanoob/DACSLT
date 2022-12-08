@@ -61,7 +61,7 @@ void Menu::printMenu(){
     for (int i = 0; i < number; i++){
         gotoxy(3, i);
         cout << item[i];
-        Sleep(1000);
+        //Sleep(1000);
     }
 }
 
@@ -70,6 +70,39 @@ void Menu::deleteMenu(){
         gotoxy(0, i);
         for (int j = 0; j < item[i].size() + 3; j++)
             cout << " ";
+    }
+}
+
+int Menu:: CtrlMenu() {
+    int x;
+    int line = 0;
+    printMenu();
+    gotoxy(0, line);
+    cout << (char) 1;
+    int esc = 0;
+    while (!esc){
+        if (kbhit()){
+            x = move();
+            gotoxy(0, line);
+            cout << " ";
+            if (x == 1 || x == 3){
+				line++;
+                if (line >= number)
+                        line = 0;
+			}
+            else if (x == 2 || x == 4){
+                line --;
+                if (line < 0)
+                    line = number - 1;
+			}
+            else if (x == 5){
+                break;
+            }
+            else if (x == 8)
+                exit(0);
+            gotoxy(0, line);
+            cout << (char) 1;
+        }
     }
 }
 
@@ -82,5 +115,5 @@ int Menu::numberOfItem(){
 }
 
 Menu::~Menu(){
-
+    delete[] item;
 }
