@@ -1,3 +1,5 @@
+#ifndef MENU_CPP
+#define MENU_CPP
 #include "Menu.h"
 #include <iostream>
 #include <conio.h>
@@ -11,50 +13,47 @@ void gotoxy(int column, int line){
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+void clearline() {
+    gotoxy(0,0);
+    cout<<"                                                 ";
+    gotoxy(0,0);
+}
+
+#define HOME gotoxy(0,0);
+#define CLEARLINE clearline();
+#define DOWN int(1)
+#define UP int(2)
+#define RIGHT int(3)
+#define LEFT int(4)
+#define ENTER int(5)
+#define ESCAPE int(8)
+
 int move(){
     char c = getch();
     if ((int)c == -32)
         c = getch();
     switch ((int) c){
         case 80:
-            return 1; //nhan phim xuong
+            return DOWN; //nhan phim xuong
         case 72:
-            return 2; //nhan phim len
+            return UP; //nhan phim len
         case 77:
-            return 3; //nhan phim phai
+            return RIGHT; //nhan phim phai
         case 75:
-            return 4; //nhan phim trai
+            return LEFT; //nhan phim trai
         case 27:
-            return 8; //nut esc
+            return ESCAPE; //nut esc
         case 13:
-            return 5; //nut enter
+            return ENTER; //nut enter
         default:
             return 0; //Sai
     }
-}
-
-Menu::Menu(){
-    item = new string [100];
-    number = 4;
-    item[0] = "Them, sua sach trong thu vien";
-    item[1] = "Them, sua, xoa nguoi dung";
-    item[2] = "muon, tra sach";
-    item[3] = "Ket thuc";
 }
 
 Menu::Menu(int strnum, string a[]): number(strnum){
     item = new string [strnum];
     for (int i = 0; i < strnum; i++)
         item[i] = a[i];
-}
-
-Menu::Menu(string a, string b, string c, string d){
-    number = 4;
-    item = new string [100];
-    item[0] = a;
-    item[1] = b;
-    item[2] = c;
-    item[3] = d;
 }
 
 void Menu::printMenu(){
@@ -85,25 +84,26 @@ int Menu:: CtrlMenu() {
             x = move();
             gotoxy(0, line);
             cout << " ";
-            if (x == 1 || x == 3){
+            if (x == DOWN || x == RIGHT){
 				line++;
                 if (line >= number)
                         line = 0;
 			}
-            else if (x == 2 || x == 4){
+            else if (x == UP || x == LEFT){
                 line --;
                 if (line < 0)
                     line = number - 1;
 			}
-            else if (x == 5){
+            else if (x == ENTER){
                 break;
             }
-            else if (x == 8)
+            else if (x == ESCAPE)
                 exit(0);
             gotoxy(0, line);
             cout << (char) 1;
         }
     }
+    return line;
 }
 
 string* Menu::getItem(){
@@ -117,3 +117,27 @@ int Menu::numberOfItem(){
 Menu::~Menu(){
     delete[] item;
 }
+
+void ShowConsoleCursor(bool showFlag)
+{
+    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    CONSOLE_CURSOR_INFO     cursorInfo;
+
+    GetConsoleCursorInfo(out, &cursorInfo);
+    cursorInfo.bVisible = showFlag; // set the cursor visibility
+    SetConsoleCursorInfo(out, &cursorInfo);
+}
+
+// Menu declaration:
+
+string mainMenuItem[4] = {"Thu vien sach", "Danh sach nguoi dung", "Muon tra sach", "Ket thuc"};
+Menu mainMenu(4,mainMenuItem);
+string sachMenuItem[4] = {"Them sach", "Xem/Sua thong tin sach", "Xoa sach", "Quay lai"};
+Menu sachMenu(4,sachMenuItem);
+string userMenuItem[4] = {"Them nguoi dung", "Xem/Sua thong tin nguoi dung", "Xoa nguoi dung", "Quay lai"};
+Menu userMenu(4,userMenuItem);
+string borrowMenuItem[4] = {"Muon sach", "Kiem tra thong tin muon sach", "Tra sach", "quay lai"};
+Menu borrowMenu(4,borrowMenuItem);
+
+#endif
