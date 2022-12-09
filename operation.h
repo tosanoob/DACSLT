@@ -5,6 +5,7 @@
 using namespace std;
 
 class operation_Handler {
+    protected:
     string file_destination;
 
     public:
@@ -13,7 +14,7 @@ class operation_Handler {
     virtual bool removeExisted() = 0;
     virtual bool readFromFile() = 0;
     virtual bool writeToFile() = 0;
-    virtual void setDestination(string) = 0;
+    bool setDestination();
 };
 
 class library_Handler : public operation_Handler {
@@ -24,7 +25,6 @@ class library_Handler : public operation_Handler {
     bool removeExisted();
     bool readFromFile();
     bool writeToFile();
-    void setDestination(string);
 };
 
 class userbase_Handler : public operation_Handler {
@@ -35,7 +35,16 @@ class userbase_Handler : public operation_Handler {
     bool removeExisted();
     bool readFromFile();
     bool writeToFile();
-    void setDestination(string);
+};
+
+class borrowing_Handler : public operation_Handler {
+    public: 
+    borrowing_Handler();
+    bool inputNew();
+    bool updateExisted();
+    bool removeExisted();
+    bool readFromFile();
+    bool writeToFile();
 };
 
 class operation_Handler_Creator {
@@ -52,6 +61,10 @@ class library_Handler_Creator : public operation_Handler_Creator {
 };
 
 class userbase_Handler_Creator : public operation_Handler_Creator {
+    operation_Handler* Creator();
+};
+
+class borrowing_Handler_Creator : public operation_Handler_Creator {
     operation_Handler* Creator();
 };
 #endif

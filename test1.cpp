@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include "sach.cpp"
 #include "user.cpp"
 #include "template.cpp"
@@ -23,13 +24,8 @@ int main()
     inp_user.close();
     inp_sach.close();
 
-    User& target = find_id("00004",userlist);
-    returnall(target);
-    userlist.remove(target);
-
-    userlist.display();
-    sachlist.display();
-/*
+    cout<<userlist.find_id<User>("00004");
+    /*
     ofstream out_borrowing("borrowing.txt");
     save_borrowlist(out_borrowing, userlist);
     cout<< "save borrowlist success\n";
@@ -38,8 +34,7 @@ int main()
     ofstream out_sach("sachbase.txt");
     write_file(out_sach, sachlist);
     write_file(out_user, userlist);
-*/
-
+    */
     cout << "test success\n";
     return 1;
 }

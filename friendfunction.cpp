@@ -2,6 +2,8 @@
 #define FUNCTION_CPP
 
 #include "friendfunction.h"
+#include "sach.cpp"
+#include "user.cpp"
 #include <iomanip>
 #include <fstream>
 #include <iostream>
@@ -42,12 +44,12 @@ void read_borrowlist(ifstream &inp, DSLK<Node<User>>& userlist, DSLK<Node<Sach>>
         getline(inp,sachid);
         if (userid == "" || sachid == "") return; //false read file
         try {
-            User* borrower_ptr = &find_id(userid,userlist);
-            Sach* target_ptr = &find_id(sachid,sachlist);
+            User* borrower_ptr = &userlist.find_id<User>(userid);
+            Sach* target_ptr = &sachlist.find_id<Sach>(sachid);
             borrower_ptr->getlist().insert(target_ptr);
             target_ptr->getlist().insert(borrower_ptr);
         }
-        catch (int returnid) { //if not found id;
+        catch (int& returnid) { //if not found id;
             if (returnid == MEMBER_NOTFOUND) cout<<"error id not found";
             else throw;
         }
@@ -93,24 +95,6 @@ void save_borrowlist(ofstream &out, DSLK<Node<User>> &list) {
 
 //------------Find & Borrow & Return------------
 
-Sach& find_id (const string & lookid, DSLK<Node<Sach>>& list) {
-    Node<Sach>* temp = list.gethead();
-    for (int i =0;i<list.getsize();i++) {
-        if (temp->getdata().getid()==lookid) return temp->getdata();
-        temp = temp->tonext();
-    }
-    if (temp==NULL) throw MEMBER_NOTFOUND;
-}
-
-User& find_id (const string & lookid, DSLK<Node<User>>& list) {
-    Node<User>* temp = list.gethead();
-    for (int i =0;i<list.getsize();i++) {
-        if (temp->getdata().getid()==lookid) return temp->getdata();
-        temp = temp->tonext();
-    }
-    if (temp==NULL) throw MEMBER_NOTFOUND;
-}
-
 bool borrowbook(User& borrower, Sach& target) {
     if (target.soban==0) return 0; 
     User* borrower_ptr = &borrower;
@@ -129,38 +113,6 @@ bool returnbook(User& borrower, Sach& target) {
     target.soban++;
     return 1;
 }
-
-/*
-    // these function needs to be called right before any deletion
-    // call this before delete a <Sach>
-void correcting (DSLK<Node<User>>& userlist, Sach& removal) {
-    Node<User>* temp = userlist.gethead();
-    Sach* target = &removal;
-    int len = userlist.getsize();
-    for (int i =0;i<len;i++) {
-        DSLK<Node<Sach*>>& ref = temp->getdata().getlist();
-        int templen = ref.getsize();
-        if (templen > 0) {
-            ref.remove(target);
-        }
-        temp = temp->tonext();
-    }
-}
-    // call this before delete a <User>
-    // 
-void correcting (DSLK<Node<Sach>>& sachlist, User& removal) {
-    Node<Sach>* temp = sachlist.gethead();
-    User* target = &removal;
-    int len = sachlist.getsize();
-    for (int i =0;i<len;i++) {
-        DSLK<Node<User*>>& ref = temp->getdata().getlist();
-        int templen = ref.getsize();
-        if (templen > 0) {
-            ref.remove(target);
-        }
-        temp = temp->tonext();
-}
-*/
 
 //call this returnall before delete a <sach>
 void returnall (Sach& target) {

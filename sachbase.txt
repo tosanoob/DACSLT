@@ -5,3 +5,4 @@
 000005|Book No.5|Author No.5|2
 000006|Book No.6|Author No.6|2
 000007|Test again|Testing again|2
+000008|New test book|New test author|2

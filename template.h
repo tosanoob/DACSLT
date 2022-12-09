@@ -49,10 +49,10 @@ public:
     bool insert(U &);//insert a member to the bottom
     template <class U>
     bool remove(U &);//find and remove a member
-    template <class U> 
-    T& update(U &);//update a member
     template <class U>
     T *find(U &);
+    template <class U>
+    U& find_id(const string&);
     void display();//display the list
 };  
 

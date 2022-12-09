@@ -2,6 +2,8 @@
 #define FUNCTION_H
 
 #include "template.h"
+#include "sach.h"
+#include "user.h"
 
 //--------------Essential functions---------------
 string increment(string&);
@@ -16,8 +18,6 @@ void write_file(ofstream&, DSLK<Node<Sach>>&);
 void save_borrowlist(ofstream&, DSLK<Node<User>>&);
 
 //-----Find & Borrow & Return----------------
-Sach& find_id (const string&, DSLK<Node<Sach>>&);
-User& find_id (const string&, DSLK<Node<User>>&);
 bool borrowbook(User&,Sach&);
 bool returnbook(User&,Sach&);
 #endif

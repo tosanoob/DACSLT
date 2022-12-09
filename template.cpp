@@ -137,24 +137,16 @@ bool DSLK<T>::remove(U &rev)
     }
 }
 
-
 template <class T>
 template <class U>
-// this method find the member with value "upd"
-// then call .update() method of class T, to update the found member;
-// if no member is found with value "upd", exit without updating.
-T& DSLK<T>::update(U &upd)
-{
-    T *temp = find(upd);
-    if (temp == NULL)
-    {
-        // no member found
-        throw MEMBER_NOTFOUND;
+U& DSLK<T> :: find_id (const string& lookid) {
+    T* temp = head;
+    for (int i =0;i<size;i++) {
+        if (temp->getdata().getid()==lookid) return temp->getdata();
+        temp = temp->tonext();
     }
-    else return *temp;
+    if (temp==NULL) throw MEMBER_NOTFOUND;
 }
-
-
 
 template <class T>
 void DSLK<T>::display()

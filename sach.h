@@ -32,22 +32,9 @@ class Sach {
 
     friend void write_file(ofstream&, DSLK<Node<Sach>>&);
     friend void read_file(ifstream&, DSLK<Node<Sach>>&);
-    friend Sach& find_id (const string &, DSLK<Node<Sach>>&);
     
     friend bool borrowbook(User& borrower, Sach& target);
     friend bool returnbook(User& borrower, Sach& target);
-    /*
-    friend functions:
-    borrow books
-    return books
-    input book from keyboard (operator >>)
-    output book to console (operator <<)
-    print list of books borrowing by a user;
-    print list of users borrowing the same book;
-    input a list of books from file
-    output a list of books to file
-    */
-    
 };
 
 #endif
