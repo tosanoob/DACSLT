@@ -133,11 +133,11 @@ void ShowConsoleCursor(bool showFlag)
 
 string mainMenuItem[4] = {"Thu vien sach", "Danh sach nguoi dung", "Muon tra sach", "Ket thuc"};
 Menu mainMenu(4,mainMenuItem);
-string sachMenuItem[4] = {"Them sach", "Xem/Sua thong tin sach", "Xoa sach", "Quay lai"};
-Menu sachMenu(4,sachMenuItem);
+string sachMenuItem[5] = {"Tra cuu danh sach sach","Them sach", "Sua thong tin sach", "Xoa sach", "Quay lai"};
+Menu sachMenu(5,sachMenuItem);
 string userMenuItem[4] = {"Them nguoi dung", "Xem/Sua thong tin nguoi dung", "Xoa nguoi dung", "Quay lai"};
 Menu userMenu(4,userMenuItem);
-string borrowMenuItem[4] = {"Muon sach", "Kiem tra thong tin muon sach", "Tra sach", "quay lai"};
-Menu borrowMenu(4,borrowMenuItem);
+string borrowMenuItem[4] = {"Muon sach", "Tra sach", "quay lai"};
+Menu borrowMenu(3,borrowMenuItem);
 
 #endif

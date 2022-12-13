@@ -25,7 +25,7 @@ class library_Handler : public operation_Handler {
     bool removeExisted();
     bool readFromFile();
     bool writeToFile();
-};
+} LH;
 
 class userbase_Handler : public operation_Handler {
     public:
@@ -35,7 +35,7 @@ class userbase_Handler : public operation_Handler {
     bool removeExisted();
     bool readFromFile();
     bool writeToFile();
-};
+} UH;
 
 class borrowing_Handler : public operation_Handler {
     public: 
@@ -45,26 +45,8 @@ class borrowing_Handler : public operation_Handler {
     bool removeExisted();
     bool readFromFile();
     bool writeToFile();
-};
+} BH;
 
-class operation_Handler_Creator {
-    public:
-    virtual operation_Handler* Creator() = 0;
+operation_Handler* switcher(const int&);
 
-    int call_to_Handler_Creator() {
-        operation_Handler* current_handler = this->Creator();
-    }
-};
-
-class library_Handler_Creator : public operation_Handler_Creator {
-    operation_Handler* Creator();
-};
-
-class userbase_Handler_Creator : public operation_Handler_Creator {
-    operation_Handler* Creator();
-};
-
-class borrowing_Handler_Creator : public operation_Handler_Creator {
-    operation_Handler* Creator();
-};
 #endif
