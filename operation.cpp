@@ -150,6 +150,50 @@ bool libraryDisplay()
     }
 }
 
+bool userDisplay()
+{
+    int size = userList.getSize();
+    int userPerPage = 15;
+    int anchor = 0;
+    while (true)
+    {
+        system("cls");
+        HOME;
+        cout << "Nhan nut mui ten trai/phai de chuyen danh sach\n";
+        cout << "Nhan ESC de quay lai\n";
+        if (anchor + userPerPage > size)
+        {
+            userList.display(anchor, size - 1);
+            cout << "\nCuoi danh sach\n";
+        }
+        else
+            userList.display(anchor, anchor + userPerPage - 1);
+        int keyGet = move();
+        switch (keyGet)
+        {
+        case RIGHT:
+        {
+            if (anchor + userPerPage <= size)
+                anchor += userPerPage;
+            break;
+        }
+        case LEFT:
+        {
+            if (anchor - userPerPage >= 0)
+                anchor -= userPerPage;
+            break;
+        }
+        case ESCAPE:
+        {
+            clearScreen();
+            return 1;
+        }
+        default:
+            break;
+        }
+    }
+}
+
 // UserbaseHandler;
 UserbaseHandler::UserbaseHandler()
 {

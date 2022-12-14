@@ -84,6 +84,11 @@ int main()
                 {
                 case 0:
                 {
+                    userDisplay();
+                    break;
+                }
+                case 1:
+                {
                     std::cout << "Them nguoi dung\n";
                     if (handler->inputNew())
                         std::cout << "Them thanh cong\n";
@@ -92,7 +97,7 @@ int main()
                     getch();
                     break;
                 }
-                case 1:
+                case 2:
                 {
                     std::cout << "Xem/Sua thong tin nguoi dung\n";
                     if (handler->updateExisted())
@@ -102,7 +107,7 @@ int main()
                     getch();
                     break;
                 }
-                case 2:
+                case 3:
                 {
                     std::cout << "Xoa nguoi dung\n";
                     if (handler->removeExisted())
@@ -112,13 +117,13 @@ int main()
                     getch();
                     break;
                 }
-                case 3:
+                case 4:
                 {
                     break;
                 }
                 }
                 // cho phan hoi sau khi thuc hien lenh
-            } while (line != 3);
+            } while (line != 4);
         else if (line == 2)
             do
             {
