@@ -6,7 +6,7 @@ using namespace std;
 
 class OperationHandler {
     protected:
-    string file_destination;
+    string fileDestination;
 
     public:
     virtual bool inputNew() = 0;
@@ -14,7 +14,7 @@ class OperationHandler {
     virtual bool removeExisted() = 0;
     virtual bool readFromFile() = 0;
     virtual bool writeToFile() = 0;
-    bool setDestination();
+    bool setDestination(const string&);
 };
 
 class LibraryHandler : public OperationHandler {
@@ -26,6 +26,8 @@ class LibraryHandler : public OperationHandler {
     bool readFromFile();
     bool writeToFile();
 } LH;
+
+bool libraryDisplay();
 
 class UserbaseHandler : public OperationHandler {
     public:

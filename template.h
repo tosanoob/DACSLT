@@ -39,7 +39,6 @@ private:
     T *tail;
 
 public:
-    // CRUD
     int getSize();
     T* getHead();
     T* getTail();
@@ -53,7 +52,7 @@ public:
     T *find(U &);
     template <class U>
     U& find_id(const string&);
-    void display();//display the list
+    void display(const int&,const int&);//display the list
 };  
 
 #endif

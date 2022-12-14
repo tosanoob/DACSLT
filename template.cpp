@@ -149,10 +149,13 @@ U& DSLK<T> :: find_id (const string& lookid) {
 }
 
 template <class T>
-void DSLK<T>::display()
+void DSLK<T>::display(const int& from, const int& to)
 {
     T *temp = head;
-    for (int i = 0; i < size; i++)
+    for (int i = 0;i<from;i++) 
+    temp=temp->toNext(); 
+
+    for (int i = from; i <= to; i++)
     {
         cout << temp->getData() << '\n';
         temp = temp->toNext();

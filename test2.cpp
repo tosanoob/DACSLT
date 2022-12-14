@@ -1,12 +1,11 @@
 #include <iostream>
-// #include <conio.h>
 #include <windows.h>
 #include "Menu.cpp"
 #include "operation.cpp"
 
 int main()
 {
-    system("cls");
+    clearScreen();
     showConsoleCursor(false);
     LH.readFromFile();
     UH.readFromFile();
@@ -15,6 +14,7 @@ int main()
 
     do
     {
+        CLEARLINE;
         int line = mainMenu.ctrlMenu();
         handler = switcher(line);
         mainMenu.deleteMenu();
@@ -22,7 +22,7 @@ int main()
         {
             do
             {
-                CLEARLINE;
+                clearScreen();
                 line = sachMenu.ctrlMenu();
                 sachMenu.deleteMenu();
                 HOME;
@@ -31,8 +31,7 @@ int main()
                 {
                 case 0:
                 {
-                    std::cout<<"In danh sach sach cho phep bam trai phai\n";
-                    std::cout<<"Dang phat trien";
+                    libraryDisplay();
                     break;
                 }
                 case 1:
@@ -42,6 +41,7 @@ int main()
                         std::cout << "Them thanh cong\n";
                     else
                         std::cout << "Da co sach voi thong tin tuong tu\n";
+                    getch();
                     break;
                 }
                 case 2:
@@ -49,6 +49,9 @@ int main()
                     std::cout << "Xem/Sua thong tin sach\n";
                     if (handler->updateExisted())
                         std::cout << "Chinh sua hoan tat\n";
+                    else
+                        std::cout << "Khong co cap nhat\n";
+                    getch();
                     break;
                 }
                 case 3:
@@ -58,22 +61,21 @@ int main()
                         std::cout << "Xoa thanh cong\n";
                     else
                         std::cout << "Xoa that bai\n";
+                    getch();
                     break;
                 }
                 case 4:
                 {
-                    std::cout << "Quay lai mainmenu";
                     break;
                 }
                 }
                 // cho phan hoi sau khi thuc hien lenh
-                getch();
             } while (line != 4);
         }
         else if (line == 1)
             do
             {
-                CLEARLINE;
+                clearScreen();
                 line = userMenu.ctrlMenu();
                 userMenu.deleteMenu();
                 HOME;
@@ -87,6 +89,7 @@ int main()
                         std::cout << "Them thanh cong\n";
                     else
                         std::cout << "Da co nguoi dung voi thong tin tuong tu\n";
+                    getch();
                     break;
                 }
                 case 1:
@@ -94,6 +97,9 @@ int main()
                     std::cout << "Xem/Sua thong tin nguoi dung\n";
                     if (handler->updateExisted())
                         std::cout << "Chinh sua hoan tat\n";
+                    else
+                        std::cout << "Khong co cap nhat\n";
+                    getch();
                     break;
                 }
                 case 2:
@@ -103,21 +109,20 @@ int main()
                         std::cout << "Xoa thanh cong\n";
                     else
                         std::cout << "Xoa that bai\n";
+                    getch();
                     break;
                 }
                 case 3:
                 {
-                    std::cout << "Quay lai mainmenu";
                     break;
                 }
                 }
                 // cho phan hoi sau khi thuc hien lenh
-                getch();
             } while (line != 3);
         else if (line == 2)
             do
             {
-                CLEARLINE;
+                clearScreen();
                 line = borrowMenu.ctrlMenu();
                 borrowMenu.deleteMenu();
                 HOME;
@@ -131,34 +136,42 @@ int main()
                         std::cout << "Muon thanh cong\n";
                     else
                         std::cout << "Muon that bai\n";
+                    getch();
                     break;
                 }
                 case 1:
+                {
+                    std::cout << "Kiem tra thong tin muon tra\n";
+                    handler->updateExisted();
+                    break;
+                }
+                case 2:
                 {
                     std::cout << "Tra sach\n";
                     if (handler->removeExisted())
                         std::cout << "Tra sach hoan tat\n";
                     else
                         std::cout << "Tra sach that bai\n";
+                    getch();
                     break;
                 }
-                case 2:
+                case 3:
                 {
-                    std::cout << "Quay lai mainmenu";
                     break;
                 }
                 }
                 // cho phan hoi sau khi thuc hien lenh
-                getch();
-            } while (line != 2);
+
+            } while (line != 3);
         else
             break;
     } while (true);
     HOME;
-    std::cout << "Ket thuc chuong trinh";
-    getch();
+    clearScreen();
+    std::cout << "Ket thuc chuong trinh...";
     LH.writeToFile();
     UH.writeToFile();
     BH.writeToFile();
+    Sleep(400);
     return 0;
 }

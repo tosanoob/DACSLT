@@ -35,7 +35,7 @@ void readFile(ifstream &inp, DSLK<Node<User>> &list)
     return;
 }
 
-void readBorrowlist(ifstream &inp, DSLK<Node<User>>& userlist, DSLK<Node<Sach>>& sachlist) {
+void readBorrowlist(ifstream &inp, DSLK<Node<User>>& userList, DSLK<Node<Sach>>& bookList) {
     string userid;
     string sachid;
     while (!inp.eof())
@@ -44,8 +44,8 @@ void readBorrowlist(ifstream &inp, DSLK<Node<User>>& userlist, DSLK<Node<Sach>>&
         getline(inp,sachid);
         if (userid == "" || sachid == "") return; //false read file
         try {
-            User* borrower_ptr = &userlist.find_id<User>(userid);
-            Sach* target_ptr = &sachlist.find_id<Sach>(sachid);
+            User* borrower_ptr = &userList.find_id<User>(userid);
+            Sach* target_ptr = &bookList.find_id<Sach>(sachid);
             borrower_ptr->getList().insert(target_ptr);
             target_ptr->getList().insert(borrower_ptr);
         }
@@ -116,12 +116,12 @@ bool returnBook(User& borrower, Sach& target) {
 
 //call this returnAll before delete a <sach>
 void returnAll (Sach& target) {
-    DSLK<Node<User*>> &userlist = target.getList();
+    DSLK<Node<User*>> &userList = target.getList();
     Node<User*>* temp;
     User* borrower_ptr;
-    int size = userlist.getSize();  
+    int size = userList.getSize();  
     for (int i =0;i<size;i++) {
-        temp = userlist.getHead();
+        temp = userList.getHead();
         borrower_ptr = temp->getData();
         returnBook(*borrower_ptr,target);
         //force-return a book
@@ -131,12 +131,12 @@ void returnAll (Sach& target) {
 
 //call this returnAll before delete a <user>
 void returnAll (User& target) {
-    DSLK<Node<Sach*>> &sachlist = target.getList();
+    DSLK<Node<Sach*>> &bookList = target.getList();
     Node<Sach*>* temp;
     Sach* sach_ptr;
-    int size = sachlist.getSize();  
+    int size = bookList.getSize();  
     for (int i =0;i<size;i++) {
-        temp = sachlist.getHead();
+        temp = bookList.getHead();
         sach_ptr = temp->getData();
         returnBook(target,*sach_ptr);
         //force-return a book
