@@ -9,8 +9,8 @@ class User;
 
 class Sach {
     private:
-    string tsach, ttgia, ma;
-    int soban;
+    string tenSach, tenTacGia, ma;
+    int soBan;
 
     DSLK<Node<User*>> list;
 
@@ -18,10 +18,10 @@ class Sach {
     Sach(string,string,int);
     void update();
     bool operator == (const Sach&);
-    void setid(const string&);
-    string getid();
-    void borrowlist();
-    DSLK<Node<User*>>& getlist();
+    void setID(const string&);
+    string getID();
+    void borrowList();
+    DSLK<Node<User*>>& getList();
     ~Sach();
 
     friend istream& operator >> (istream&, Sach&);
@@ -29,12 +29,9 @@ class Sach {
     
     friend ifstream& operator >> (ifstream&, Sach&);
     friend ofstream& operator << (ofstream&, Sach&);
-
-    friend void write_file(ofstream&, DSLK<Node<Sach>>&);
-    friend void read_file(ifstream&, DSLK<Node<Sach>>&);
     
-    friend bool borrowbook(User& borrower, Sach& target);
-    friend bool returnbook(User& borrower, Sach& target);
+    friend bool borrowBook(User& borrower, Sach& target);
+    friend bool returnBook(User& borrower, Sach& target);
 };
 
 #endif

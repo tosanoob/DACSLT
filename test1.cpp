@@ -14,9 +14,9 @@ int main()
 
     DSLK<Node<Sach>> sachlist;
     DSLK<Node<User>> userlist;
-    read_file(inp_user, userlist);
-    read_file(inp_sach, sachlist);
-    read_borrowlist(inp_borrowing,userlist,sachlist);
+    readFile(inp_user, userlist);
+    readFile(inp_sach, sachlist);
+    readBorrowlist(inp_borrowing,userlist,sachlist);
     cout<<"read success\n";
 
     //writenew
@@ -28,7 +28,7 @@ int main()
     /*
     ofstream out_borrowing("borrowing.txt");
     save_borrowlist(out_borrowing, userlist);
-    cout<< "save borrowlist success\n";
+    cout<< "save borrowList success\n";
 
     ofstream out_user("userbase.txt");
     ofstream out_sach("sachbase.txt");

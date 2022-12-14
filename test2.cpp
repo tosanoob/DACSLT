@@ -7,15 +7,15 @@
 int main()
 {
     system("cls");
-    ShowConsoleCursor(false);
+    showConsoleCursor(false);
     LH.readFromFile();
     UH.readFromFile();
     BH.readFromFile();
-    operation_Handler *handler;
+    OperationHandler *handler;
 
     do
     {
-        int line = mainMenu.CtrlMenu();
+        int line = mainMenu.ctrlMenu();
         handler = switcher(line);
         mainMenu.deleteMenu();
         if (line == 0)
@@ -23,7 +23,7 @@ int main()
             do
             {
                 CLEARLINE;
-                line = sachMenu.CtrlMenu();
+                line = sachMenu.ctrlMenu();
                 sachMenu.deleteMenu();
                 HOME;
                 // thuc hien lenh theo lua chon
@@ -74,7 +74,7 @@ int main()
             do
             {
                 CLEARLINE;
-                line = userMenu.CtrlMenu();
+                line = userMenu.ctrlMenu();
                 userMenu.deleteMenu();
                 HOME;
                 // thuc hien lenh theo lua chon
@@ -118,7 +118,7 @@ int main()
             do
             {
                 CLEARLINE;
-                line = borrowMenu.CtrlMenu();
+                line = borrowMenu.ctrlMenu();
                 borrowMenu.deleteMenu();
                 HOME;
                 // thuc hien lenh theo lua chon

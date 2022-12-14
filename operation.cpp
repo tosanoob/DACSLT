@@ -12,39 +12,39 @@
 DSLK<Node<Sach>> sachlist;
 DSLK<Node<User>> userlist;
 
-// library_Handler
+// LibraryHandler
 
-library_Handler::library_Handler()
+LibraryHandler::LibraryHandler()
 {
     file_destination = "sachbase.txt";
 }
 
-bool library_Handler::readFromFile()
+bool LibraryHandler::readFromFile()
 {
     ifstream inp(file_destination);
-    read_file(inp, sachlist);
+    readFile(inp, sachlist);
     inp.close();
 }
 
-bool library_Handler::writeToFile()
+bool LibraryHandler::writeToFile()
 {
     ofstream out(file_destination);
-    write_file(out, sachlist);
+    writeFile(out, sachlist);
     out.close();
 }
 
-bool library_Handler::inputNew()
+bool LibraryHandler::inputNew()
 {
     // Ham nhap them sach moi tu ban phim;
     Sach newbook;
     cin >> newbook;
-    string last_id = sachlist.gettail()->getdata().getid();
-    newbook.setid(increment(last_id));
+    string last_id = sachlist.getTail()->getData().getID();
+    newbook.setID(increment(last_id));
     return sachlist.insert(newbook);
     // neu them thanh cong tra ve 1, them that bai tra ve 0
 }
 
-bool library_Handler::updateExisted()
+bool LibraryHandler::updateExisted()
 {
     string target_id;
     cout << "Nhap id sach muon chinh sua: ";
@@ -66,7 +66,7 @@ bool library_Handler::updateExisted()
     }
 }
 
-bool library_Handler::removeExisted()
+bool LibraryHandler::removeExisted()
 {
     string target_id;
     cin >> target_id;
@@ -101,20 +101,20 @@ bool library_Handler::removeExisted()
     }
 }
 
-// userbase_Handler;
-userbase_Handler::userbase_Handler()
+// UserbaseHandler;
+UserbaseHandler::UserbaseHandler()
 {
     file_destination = "userbase.txt";
 }
-bool userbase_Handler::inputNew()
+bool UserbaseHandler::inputNew()
 {
     User newbook;
     cin >> newbook;
-    string last_id = userlist.gettail()->getdata().getid();
-    newbook.setid(increment(last_id));
+    string last_id = userlist.getTail()->getData().getID();
+    newbook.setID(increment(last_id));
     return userlist.insert(newbook);
 }
-bool userbase_Handler::updateExisted()
+bool UserbaseHandler::updateExisted()
 {
     cout<<"Nhap thong tin nguoi dung muon chinh sua:\n";
     string target_id;
@@ -136,7 +136,7 @@ bool userbase_Handler::updateExisted()
         return 0;
     }
 }
-bool userbase_Handler::removeExisted()
+bool UserbaseHandler::removeExisted()
 {
     string target_id;
     cin >> target_id;
@@ -151,7 +151,7 @@ bool userbase_Handler::removeExisted()
         {
         case 'Y':
         {
-            sachlist.remove(target);
+            userlist.remove(target);
             return 1;
         }
         case 'N':
@@ -170,25 +170,25 @@ bool userbase_Handler::removeExisted()
         return 0;
     }
 }
-bool userbase_Handler::readFromFile()
+bool UserbaseHandler::readFromFile()
 {
     ifstream inp(file_destination);
-    read_file(inp, userlist);
+    readFile(inp, userlist);
     inp.close();
 }
-bool userbase_Handler::writeToFile()
+bool UserbaseHandler::writeToFile()
 {
     ofstream out(file_destination);
-    write_file(out, userlist);
+    writeFile(out, userlist);
     out.close();
 }
 
-// borrowing_Handler:
-borrowing_Handler::borrowing_Handler()
+// BorrowingHandler:
+BorrowingHandler::BorrowingHandler()
 {
     file_destination = "borrowing.txt";
 }
-bool borrowing_Handler::inputNew()
+bool BorrowingHandler::inputNew()
 {
     string userid, sachid;
     int step = 0;
@@ -201,7 +201,7 @@ bool borrowing_Handler::inputNew()
         cout << "Nhap id sach muon muon: ";
         cin >> sachid;
         Sach &target = sachlist.find_id<Sach>(sachid);
-        return borrowbook(borrower, target);
+        return borrowBook(borrower, target);
         // muon thanh cong tra ve 1, that bai tra ve 0
     }
     catch (int &exc)
@@ -214,13 +214,13 @@ bool borrowing_Handler::inputNew()
         return 0;
     }
 }
-bool borrowing_Handler::updateExisted()
+bool BorrowingHandler::updateExisted()
 {
     // instead show borrowing information of a book:
 
     return 1;
 }
-bool borrowing_Handler::removeExisted()
+bool BorrowingHandler::removeExisted()
 {
     string userid, sachid;
     int step = 0;
@@ -233,7 +233,7 @@ bool borrowing_Handler::removeExisted()
         cout << "Nhap id sach muon tra: ";
         cin >> sachid;
         Sach &target = sachlist.find_id<Sach>(sachid);
-        return returnbook(borrower, target);
+        return returnBook(borrower, target);
         // tra thanh cong tra ve 1, that bai tra ve 0
     }
     catch (int &exc)
@@ -246,20 +246,20 @@ bool borrowing_Handler::removeExisted()
         return 0;
     }
 }
-bool borrowing_Handler::readFromFile()
+bool BorrowingHandler::readFromFile()
 {
     ifstream inp(file_destination);
-    read_borrowlist(inp, userlist, sachlist);
+    readBorrowlist(inp, userlist, sachlist);
     inp.close();
 }
-bool borrowing_Handler::writeToFile()
+bool BorrowingHandler::writeToFile()
 {
     ofstream out(file_destination);
-    save_borrowlist(out, userlist);
+    saveBorrowlist(out, userlist);
     out.close();
 }
 
-operation_Handler *switcher(const int &i)
+OperationHandler *switcher(const int &i)
 {
     switch (i)
     {

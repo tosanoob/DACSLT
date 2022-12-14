@@ -10,17 +10,17 @@ using namespace std;
 template <class U>
 Node<U> :: Node(const U &d) : data(d),next(NULL),prev(NULL) {}
 template <class U>
-Node<U>* Node<U> :: tonext() {return next;}
+Node<U>* Node<U> :: toNext() {return next;}
 template <class U>
-Node<U>* Node<U> :: toprev() {return prev;}
+Node<U>* Node<U> :: toPrev() {return prev;}
 template <class U>
-void Node<U> ::setnext(Node<U> *a) {next=a;}
+void Node<U> ::setNext(Node<U> *a) {next=a;}
 template <class U>
-void Node<U> ::setprev(Node<U> *a) {prev=a;}
+void Node<U> ::setPrev(Node<U> *a) {prev=a;}
 template <class U>
 Node<U>:: ~Node() {next=NULL;prev=NULL;}
 template <class U>
-U& Node<U>:: getdata() {return data;}
+U& Node<U>:: getData() {return data;}
 
 //------------------------------------------------------
 
@@ -28,13 +28,13 @@ U& Node<U>:: getdata() {return data;}
 //T is an instantiation of Node<U>
 
 template <class T>
-int DSLK<T>:: getsize() {return size;}
+int DSLK<T>:: getSize() {return size;}
 
 template <class T>
-T* DSLK<T>:: gethead() {return head;}
+T* DSLK<T>:: getHead() {return head;}
 
 template <class T>
-T* DSLK<T>:: gettail() {return tail;}
+T* DSLK<T>:: getTail() {return tail;}
 
 template <class T>
 DSLK<T>:: DSLK() : head(NULL), tail(NULL), size(0) {}
@@ -48,11 +48,11 @@ T *DSLK<T>::find(U &findvalue)
     T *temp = head;
     for (int i = 0; i < size; i++)
     {
-        if (temp->getdata() == findvalue)
+        if (temp->getData() == findvalue)
         {
             return temp;
         }
-        temp = temp->tonext();
+        temp = temp->toNext();
     }
     return NULL;
 }
@@ -77,8 +77,8 @@ bool DSLK<T>::insert(U &add)
         if (find(add) != NULL)
             return 0;
         temp = new T(add);
-        tail->setnext(temp);
-        temp->setprev(tail);
+        tail->setNext(temp);
+        temp->setPrev(tail);
         tail = temp;
         size++;
         // insert success
@@ -108,8 +108,8 @@ bool DSLK<T>::remove(U &rev)
             // delete the only member
             return 1;
         }
-        head = head->tonext();
-        head->setprev(NULL);
+        head = head->toNext();
+        head->setPrev(NULL);
         delete temp;
         size--;
         // delete the head
@@ -117,8 +117,8 @@ bool DSLK<T>::remove(U &rev)
     }
     else if (temp == tail)
     {
-        tail = tail->toprev();
-        tail->setnext(NULL);
+        tail = tail->toPrev();
+        tail->setNext(NULL);
         delete temp;
         size--;
         // delete the tail
@@ -126,10 +126,10 @@ bool DSLK<T>::remove(U &rev)
     }
     else
     {
-        T *tempprev = temp->toprev();
-        T *tempnext = temp->tonext();
-        tempprev->setnext(tempnext);
-        tempnext->setprev(tempprev);
+        T *tempprev = temp->toPrev();
+        T *tempnext = temp->toNext();
+        tempprev->setNext(tempnext);
+        tempnext->setPrev(tempprev);
         delete temp;
         size--;
         // delete at any other position
@@ -142,8 +142,8 @@ template <class U>
 U& DSLK<T> :: find_id (const string& lookid) {
     T* temp = head;
     for (int i =0;i<size;i++) {
-        if (temp->getdata().getid()==lookid) return temp->getdata();
-        temp = temp->tonext();
+        if (temp->getData().getID()==lookid) return temp->getData();
+        temp = temp->toNext();
     }
     if (temp==NULL) throw MEMBER_NOTFOUND;
 }
@@ -154,8 +154,8 @@ void DSLK<T>::display()
     T *temp = head;
     for (int i = 0; i < size; i++)
     {
-        cout << temp->getdata() << '\n';
-        temp = temp->tonext();
+        cout << temp->getData() << '\n';
+        temp = temp->toNext();
     }
 }
 
@@ -170,7 +170,7 @@ DSLK<T>::~DSLK()
     for (int i = 0; i < size; i++)
     {
         tempsave = temp;
-        temp = temp->tonext();
+        temp = temp->toNext();
         delete tempsave;
     }
 }

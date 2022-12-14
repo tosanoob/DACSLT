@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-class operation_Handler {
+class OperationHandler {
     protected:
     string file_destination;
 
@@ -17,9 +17,9 @@ class operation_Handler {
     bool setDestination();
 };
 
-class library_Handler : public operation_Handler {
+class LibraryHandler : public OperationHandler {
     public:
-    library_Handler();
+    LibraryHandler();
     bool inputNew();
     bool updateExisted();
     bool removeExisted();
@@ -27,9 +27,9 @@ class library_Handler : public operation_Handler {
     bool writeToFile();
 } LH;
 
-class userbase_Handler : public operation_Handler {
+class UserbaseHandler : public OperationHandler {
     public:
-    userbase_Handler();
+    UserbaseHandler();
     bool inputNew();
     bool updateExisted();
     bool removeExisted();
@@ -37,9 +37,9 @@ class userbase_Handler : public operation_Handler {
     bool writeToFile();
 } UH;
 
-class borrowing_Handler : public operation_Handler {
+class BorrowingHandler : public OperationHandler {
     public: 
-    borrowing_Handler();
+    BorrowingHandler();
     bool inputNew();
     bool updateExisted();
     bool removeExisted();
@@ -47,6 +47,6 @@ class borrowing_Handler : public operation_Handler {
     bool writeToFile();
 } BH;
 
-operation_Handler* switcher(const int&);
+OperationHandler* switcher(const int&);
 
 #endif

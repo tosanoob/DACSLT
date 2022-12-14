@@ -16,10 +16,10 @@ public:
     User(string, string);
     void update();
     bool operator==(const User &);
-    void setid(const string &);
-    string getid();
-    void borrowlist();
-    DSLK<Node<Sach*>>& getlist(); 
+    void setID(const string &);
+    string getID();
+    void borrowList();
+    DSLK<Node<Sach*>>& getList(); 
     ~User();
 
     friend istream &operator>>(istream &, User &);
@@ -27,9 +27,6 @@ public:
 
     friend ifstream& operator >> (ifstream&, User&);
     friend ofstream& operator << (ofstream&, User&);
-
-    friend void write_file(ofstream&, DSLK<Node<User>>&);
-    friend void read_file(ifstream&, DSLK<Node<User>>&);
 };
 
 #endif

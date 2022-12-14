@@ -10,7 +10,7 @@ class Menu{
     public:
         Menu(int strnum, string a[]);
         ~Menu();
-        int CtrlMenu();
+        int ctrlMenu();
         void printMenu();
         void deleteMenu();
         int numberOfItem();

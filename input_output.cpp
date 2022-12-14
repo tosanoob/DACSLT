@@ -21,7 +21,7 @@ string increment(string & input) {
     return input;
 }
 
-bool check_cmd(string & inp) {
+bool checkCmd(string & inp) {
     int len = inp.length()-1;
     for (int i=0;i<=len;i++) {
         if (inp[i]<'0' || inp[i]>'9') return 0;
@@ -42,7 +42,7 @@ istream &operator>>(istream &inp, User &a)
     do 
     {
         inp >> a.cmd;    
-        flag = check_cmd(a.cmd);
+        flag = checkCmd(a.cmd);
         if (!flag) {
             cout<<"So CMND gom 9 ki tu so, vui long nhap lai: "; 
         }
@@ -76,34 +76,34 @@ istream &operator>>(istream &inp, Sach &a)
 {
     cout << "Nhap ten sach: ";
     inp.sync();
-    getline(inp, a.tsach, '\n');
+    getline(inp, a.tenSach, '\n');
     cout << "Nhap ten tac gia: ";
-    getline(inp, a.ttgia, '\n');
+    getline(inp, a.tenTacGia, '\n');
     cout << "Nhap so ban: ";
-    inp >> a.soban;
+    inp >> a.soBan;
     return inp;
 }
 
 ostream &operator<<(ostream &out, const Sach &a)
 {
-    out << a.ma << setw(40) << a.tsach << setw(40) << a.ttgia << setw(6) << a.soban;
+    out << a.ma << setw(40) << a.tenSach << setw(40) << a.tenTacGia << setw(6) << a.soBan;
     return out;
 }
 
 ofstream &operator<<(ofstream &out, Sach &a)
 {
-    out << a.ma << '|' << a.tsach << '|' << a.ttgia << '|' << a.soban << '\n';
+    out << a.ma << '|' << a.tenSach << '|' << a.tenTacGia << '|' << a.soBan << '\n';
     return out;
 }
 
 ifstream &operator>>(ifstream &inp, Sach &a)
 {
     getline(inp, a.ma, '|');
-    getline(inp, a.tsach, '|');
-    getline(inp, a.ttgia, '|');
+    getline(inp, a.tenSach, '|');
+    getline(inp, a.tenTacGia, '|');
     string cp;
     getline(inp, cp, '\n');
-    try {a.soban = stoi(cp);}
+    try {a.soBan = stoi(cp);}
     catch (invalid_argument) {
         throw;
     }

@@ -72,7 +72,7 @@ void Menu::deleteMenu(){
     }
 }
 
-int Menu:: CtrlMenu() {
+int Menu:: ctrlMenu() {
     int x;
     int line = 0;
     printMenu();
@@ -118,7 +118,7 @@ Menu::~Menu(){
     delete[] item;
 }
 
-void ShowConsoleCursor(bool showFlag)
+void showConsoleCursor(bool showFlag)
 {
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
 

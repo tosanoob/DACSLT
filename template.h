@@ -19,11 +19,11 @@ private:
     //---------------
 public:
     Node(const U&);
-    Node *tonext();
-    Node *toprev();
-    U &getdata();
-    void setnext(Node *);
-    void setprev(Node *);
+    Node *toNext();
+    Node *toPrev();
+    U &getData();
+    void setNext(Node *);
+    void setPrev(Node *);
     ~Node();
 };
 
@@ -40,9 +40,9 @@ private:
 
 public:
     // CRUD
-    int getsize();
-    T* gethead();
-    T* gettail();
+    int getSize();
+    T* getHead();
+    T* getTail();
     DSLK(); //constructor
     ~DSLK();//destructor
     template <class U>

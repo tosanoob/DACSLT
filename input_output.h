@@ -7,7 +7,7 @@
 
 // necessary functions:
 string increment(string &);
-bool check_cmd(string &);
+bool checkCmd(string &);
 
 //-------------Operator << >> for User------------
 istream &operator>>(istream &, User &);
