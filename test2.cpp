@@ -1,7 +1,8 @@
 #include <iostream>
 #include <windows.h>
-#include "Menu.cpp"
 #include "operation.cpp"
+#include "Menu.cpp"
+
 
 int main()
 {
