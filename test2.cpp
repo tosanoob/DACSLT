@@ -37,18 +37,23 @@ int main()
                 case 1:
                 {
                     std::cout << "Them sach\n";
-                    if (handler->inputNew())
+                    if (handler->inputNew()){
                         std::cout << "Them thanh cong\n";
+                        handler->writeToFile();
+                    }
                     else
                         std::cout << "Da co sach voi thong tin tuong tu\n";
                     getch();
+
                     break;
                 }
                 case 2:
                 {
                     std::cout << "Xem/Sua thong tin sach\n";
-                    if (handler->updateExisted())
+                    if (handler->updateExisted()){
                         std::cout << "Chinh sua hoan tat\n";
+                        handler->writeToFile();
+                    }
                     else
                         std::cout << "Khong co cap nhat\n";
                     getch();
@@ -57,8 +62,10 @@ int main()
                 case 3:
                 {
                     std::cout << "Xoa sach\n";
-                    if (handler->removeExisted())
+                    if (handler->removeExisted()){
                         std::cout << "Xoa thanh cong\n";
+                        handler->writeToFile();
+                    }
                     else
                         std::cout << "Xoa that bai\n";
                     getch();
@@ -84,41 +91,52 @@ int main()
                 {
                 case 0:
                 {
+                    userDisplay();
+                    break;
+                }
+                case 1:
+                {
                     std::cout << "Them nguoi dung\n";
-                    if (handler->inputNew())
+                    if (handler->inputNew()){
                         std::cout << "Them thanh cong\n";
+                        handler->writeToFile();
+                    }
                     else
                         std::cout << "Da co nguoi dung voi thong tin tuong tu\n";
                     getch();
                     break;
                 }
-                case 1:
+                case 2:
                 {
                     std::cout << "Xem/Sua thong tin nguoi dung\n";
-                    if (handler->updateExisted())
+                    if (handler->updateExisted()){
                         std::cout << "Chinh sua hoan tat\n";
+                        handler->writeToFile();
+                    }
                     else
                         std::cout << "Khong co cap nhat\n";
                     getch();
                     break;
                 }
-                case 2:
+                case 3:
                 {
                     std::cout << "Xoa nguoi dung\n";
-                    if (handler->removeExisted())
+                    if (handler->removeExisted()){
                         std::cout << "Xoa thanh cong\n";
+                        handler->writeToFile();
+                    }
                     else
                         std::cout << "Xoa that bai\n";
                     getch();
                     break;
                 }
-                case 3:
+                case 4:
                 {
                     break;
                 }
                 }
                 // cho phan hoi sau khi thuc hien lenh
-            } while (line != 3);
+            } while (line != 4);
         else if (line == 2)
             do
             {
@@ -132,8 +150,10 @@ int main()
                 case 0:
                 {
                     std::cout << "Muon sach\n";
-                    if (handler->inputNew())
+                    if (handler->inputNew()){
                         std::cout << "Muon thanh cong\n";
+                        handler->writeToFile();
+                    }
                     else
                         std::cout << "Muon that bai\n";
                     getch();
@@ -148,8 +168,10 @@ int main()
                 case 2:
                 {
                     std::cout << "Tra sach\n";
-                    if (handler->removeExisted())
+                    if (handler->removeExisted()){
                         std::cout << "Tra sach hoan tat\n";
+                        handler->writeToFile();
+                    }
                     else
                         std::cout << "Tra sach that bai\n";
                     getch();

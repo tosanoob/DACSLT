@@ -49,3 +49,6 @@
 000049|Book No.49|Author No.49|3
 000050|Book No.50|Author No.50|2
 000051|Book No.51|Author No.51|2
+000052|Tam the|Luu Tu Han|3
+000053|Nha Gia Kim|Paul Coelho|3
+000054|Nguyen Anh - Mot cuoc doi vi dai|Truong Tan Cuong|3

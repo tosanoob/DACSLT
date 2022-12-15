@@ -147,9 +147,9 @@ string mainMenuItem[4] = {"Thu vien sach", "Danh sach nguoi dung", "Muon tra sac
 Menu mainMenu(4,mainMenuItem);
 string sachMenuItem[5] = {"Tra cuu danh sach sach","Them sach", "Sua thong tin sach", "Xoa sach", "Quay lai"};
 Menu sachMenu(5,sachMenuItem);
-string userMenuItem[4] = {"Them nguoi dung", "Xem/Sua thong tin nguoi dung", "Xoa nguoi dung", "Quay lai"};
-Menu userMenu(4,userMenuItem);
-string borrowMenuItem[4] = {"Muon sach","Kiem tra thong tin muon sach", "Tra sach", "Quay lai"};
+string userMenuItem[5] = {"Tra cuu danh sach nguoi dung", "Them nguoi dung", "Xem/Sua thong tin nguoi dung", "Xoa nguoi dung", "Quay lai"};
+Menu userMenu(5,userMenuItem);
+string borrowMenuItem[4] = { "Muon sach","Kiem tra thong tin muon sach", "Tra sach", "Quay lai"};
 Menu borrowMenu(4,borrowMenuItem);
 string borrowInfoMenuItem[3] = {"Thong tin sach","Thong tin nguoi dung", "Quay lai"};
 Menu borrowInfoMenu(3,borrowInfoMenuItem);
