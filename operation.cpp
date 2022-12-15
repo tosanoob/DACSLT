@@ -21,7 +21,7 @@ bool OperationHandler::setDestination(const string &dest)
 
 LibraryHandler::LibraryHandler()
 {
-    fileDestination = "sachbase.txt";
+    fileDestination = "./File_txt/sachbase.txt";
 }
 
 bool LibraryHandler::readFromFile()
@@ -197,7 +197,7 @@ bool userDisplay()
 // UserbaseHandler;
 UserbaseHandler::UserbaseHandler()
 {
-    fileDestination = "userbase.txt";
+    fileDestination = "./File_txt/userbase.txt";
 }
 bool UserbaseHandler::inputNew()
 {
@@ -279,7 +279,7 @@ bool UserbaseHandler::writeToFile()
 // BorrowingHandler:
 BorrowingHandler::BorrowingHandler()
 {
-    fileDestination = "borrowing.txt";
+    fileDestination = "./File_txt/borrowing.txt";
 }
 bool BorrowingHandler::inputNew()
 {
