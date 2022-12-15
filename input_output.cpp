@@ -1,9 +1,9 @@
 #ifndef INPUT_OUTPUT_CPP
 #define INPUT_OUTPUT_CPP
 
-#include "user.h"
-#include "sach.h"
-#include "friendfunction.h"
+#include "../DACSLT3/Header/user.h"
+#include "../DACSLT3/Header/sach.h"
+#include "../DACSLT3/Header/friendfunction.h"
 #include <iomanip>
 #include <fstream>
 #include <iostream>
