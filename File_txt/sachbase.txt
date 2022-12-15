@@ -52,3 +52,4 @@
 000052|Tam the|Luu Tu Han|3
 000053|Nha Gia Kim|Paul Coelho|3
 000054|Nguyen Anh - Mot cuoc doi vi dai|Truong Tan Cuong|3
+000055|Giai thuat|Phan Thanh Tao|10
