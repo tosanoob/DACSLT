@@ -2,13 +2,15 @@
 #define FUNCTION_CPP
 
 #include "friendfunction.h"
+#include "sach.cpp"
+#include "user.cpp"
 #include <iomanip>
 #include <fstream>
 #include <iostream>
 using namespace std;
 
 //-------------Readfile & Writefile---------
-void read_file(ifstream &inp, DSLK<Node<Sach>> &list)
+void readFile(ifstream &inp, DSLK<Node<Sach>> &list)
 {
     Sach temp;
     while (!inp.eof())
@@ -22,7 +24,7 @@ void read_file(ifstream &inp, DSLK<Node<Sach>> &list)
     return;
 }
 
-void read_file(ifstream &inp, DSLK<Node<User>> &list)
+void readFile(ifstream &inp, DSLK<Node<User>> &list)
 {
     User temp;
     while (!inp.eof())
@@ -33,7 +35,7 @@ void read_file(ifstream &inp, DSLK<Node<User>> &list)
     return;
 }
 
-void read_borrowlist(ifstream &inp, DSLK<Node<User>>& userlist, DSLK<Node<Sach>>& sachlist) {
+void readBorrowlist(ifstream &inp, DSLK<Node<User>>& userList, DSLK<Node<Sach>>& bookList) {
     string userid;
     string sachid;
     while (!inp.eof())
@@ -42,151 +44,101 @@ void read_borrowlist(ifstream &inp, DSLK<Node<User>>& userlist, DSLK<Node<Sach>>
         getline(inp,sachid);
         if (userid == "" || sachid == "") return; //false read file
         try {
-            User* borrower_ptr = &find_id(userid,userlist);
-            Sach* target_ptr = &find_id(sachid,sachlist);
-            borrower_ptr->getlist().insert(target_ptr);
-            target_ptr->getlist().insert(borrower_ptr);
+            User* borrower_ptr = &userList.find_id<User>(userid);
+            Sach* target_ptr = &bookList.find_id<Sach>(sachid);
+            borrower_ptr->getList().insert(target_ptr);
+            target_ptr->getList().insert(borrower_ptr);
         }
-        catch (int returnid) { //if not found id;
+        catch (int& returnid) { //if not found id;
             if (returnid == MEMBER_NOTFOUND) cout<<"error id not found";
             else throw;
         }
     }
 }
 
-void write_file(ofstream &out, DSLK<Node<User>> &list)
+void writeFile(ofstream &out, DSLK<Node<User>> &list)
 {
-    Node<User>* temp = list.gethead();
-    for (int i =0;i<list.getsize();i++) {
-        out<<temp->getdata();
-        temp=temp->tonext();
+    Node<User>* temp = list.getHead();
+    for (int i =0;i<list.getSize();i++) {
+        out<<temp->getData();
+        temp=temp->toNext();
     }
 }
 
-void write_file(ofstream &out, DSLK<Node<Sach>> &list)
+void writeFile(ofstream &out, DSLK<Node<Sach>> &list)
 {
-    Node<Sach>* temp = list.gethead();
-    for (int i =0;i<list.getsize();i++) {
-        out<<temp->getdata();
-        temp=temp->tonext();
+    Node<Sach>* temp = list.getHead();
+    for (int i =0;i<list.getSize();i++) {
+        out<<temp->getData();
+        temp=temp->toNext();
     }
 }
 
-void save_borrowlist(ofstream &out, DSLK<Node<User>> &list) {
-    Node<User>* temp = list.gethead();
-    int len = list.getsize();
+void saveBorrowlist(ofstream &out, DSLK<Node<User>> &list) {
+    Node<User>* temp = list.getHead();
+    int len = list.getSize();
     for (int i=0;i<len;i++) {
-        DSLK<Node<Sach*>>& booklist = temp->getdata().getlist();
-        int size = booklist.getsize();
+        DSLK<Node<Sach*>>& booklist = temp->getData().getList();
+        int size = booklist.getSize();
         if (size>0) {
-            Node<Sach*>* tempptr = booklist.gethead();
-            string userid = temp->getdata().getid();
+            Node<Sach*>* tempptr = booklist.getHead();
+            string userid = temp->getData().getID();
             for (int j =0;j<size;j++) {
-                string bookid = tempptr->getdata()->getid();
+                string bookid = tempptr->getData()->getID();
                 out<<userid<<'|'<<bookid<<'\n';
-                tempptr=tempptr->tonext();
+                tempptr=tempptr->toNext();
             }
         }
-        temp=temp->tonext();
+        temp=temp->toNext();
     }
 }
 
 //------------Find & Borrow & Return------------
 
-Sach& find_id (const string & lookid, DSLK<Node<Sach>>& list) {
-    Node<Sach>* temp = list.gethead();
-    for (int i =0;i<list.getsize();i++) {
-        if (temp->getdata().getid()==lookid) return temp->getdata();
-        temp = temp->tonext();
-    }
-    if (temp==NULL) throw MEMBER_NOTFOUND;
-}
-
-User& find_id (const string & lookid, DSLK<Node<User>>& list) {
-    Node<User>* temp = list.gethead();
-    for (int i =0;i<list.getsize();i++) {
-        if (temp->getdata().getid()==lookid) return temp->getdata();
-        temp = temp->tonext();
-    }
-    if (temp==NULL) throw MEMBER_NOTFOUND;
-}
-
-bool borrowbook(User& borrower, Sach& target) {
-    if (target.soban==0) return 0; 
+bool borrowBook(User& borrower, Sach& target) {
+    if (target.soBan==0) return 0; 
     User* borrower_ptr = &borrower;
     Sach* target_ptr = &target;
-    borrower.getlist().insert(target_ptr);
-    target.getlist().insert(borrower_ptr);
-    target.soban--;
+    borrower.getList().insert(target_ptr);
+    target.getList().insert(borrower_ptr);
+    target.soBan--;
     return 1;
 }
 
-bool returnbook(User& borrower, Sach& target) {
+bool returnBook(User& borrower, Sach& target) {
     User* borrower_ptr = &borrower;
     Sach* target_ptr = &target;
-    borrower.getlist().remove(target_ptr);
-    target.getlist().remove(borrower_ptr);
-    target.soban++;
+    borrower.getList().remove(target_ptr);
+    target.getList().remove(borrower_ptr);
+    target.soBan++;
     return 1;
 }
 
-/*
-    // these function needs to be called right before any deletion
-    // call this before delete a <Sach>
-void correcting (DSLK<Node<User>>& userlist, Sach& removal) {
-    Node<User>* temp = userlist.gethead();
-    Sach* target = &removal;
-    int len = userlist.getsize();
-    for (int i =0;i<len;i++) {
-        DSLK<Node<Sach*>>& ref = temp->getdata().getlist();
-        int templen = ref.getsize();
-        if (templen > 0) {
-            ref.remove(target);
-        }
-        temp = temp->tonext();
-    }
-}
-    // call this before delete a <User>
-    // 
-void correcting (DSLK<Node<Sach>>& sachlist, User& removal) {
-    Node<Sach>* temp = sachlist.gethead();
-    User* target = &removal;
-    int len = sachlist.getsize();
-    for (int i =0;i<len;i++) {
-        DSLK<Node<User*>>& ref = temp->getdata().getlist();
-        int templen = ref.getsize();
-        if (templen > 0) {
-            ref.remove(target);
-        }
-        temp = temp->tonext();
-}
-*/
-
-//call this returnall before delete a <sach>
-void returnall (Sach& target) {
-    DSLK<Node<User*>> &userlist = target.getlist();
+//call this returnAll before delete a <sach>
+void returnAll (Sach& target) {
+    DSLK<Node<User*>> &userList = target.getList();
     Node<User*>* temp;
     User* borrower_ptr;
-    int size = userlist.getsize();  
+    int size = userList.getSize();  
     for (int i =0;i<size;i++) {
-        temp = userlist.gethead();
-        borrower_ptr = temp->getdata();
-        returnbook(*borrower_ptr,target);
+        temp = userList.getHead();
+        borrower_ptr = temp->getData();
+        returnBook(*borrower_ptr,target);
         //force-return a book
         //don't need to move temp->tonext(), the head will be modified itself
     }
 }
 
-//call this returnall before delete a <user>
-void returnall (User& target) {
-    DSLK<Node<Sach*>> &sachlist = target.getlist();
+//call this returnAll before delete a <user>
+void returnAll (User& target) {
+    DSLK<Node<Sach*>> &bookList = target.getList();
     Node<Sach*>* temp;
     Sach* sach_ptr;
-    int size = sachlist.getsize();  
+    int size = bookList.getSize();  
     for (int i =0;i<size;i++) {
-        temp = sachlist.gethead();
-        sach_ptr = temp->getdata();
-        returnbook(target,*sach_ptr);
+        temp = bookList.getHead();
+        sach_ptr = temp->getData();
+        returnBook(target,*sach_ptr);
         //force-return a book
         //don't need to move temp->tonext(), the head will be modified itself
     }

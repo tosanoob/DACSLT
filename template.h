@@ -19,11 +19,11 @@ private:
     //---------------
 public:
     Node(const U&);
-    Node *tonext();
-    Node *toprev();
-    U &getdata();
-    void setnext(Node *);
-    void setprev(Node *);
+    Node *toNext();
+    Node *toPrev();
+    U &getData();
+    void setNext(Node *);
+    void setPrev(Node *);
     ~Node();
 };
 
@@ -39,21 +39,20 @@ private:
     T *tail;
 
 public:
-    // CRUD
-    int getsize();
-    T* gethead();
-    T* gettail();
+    int getSize();
+    T* getHead();
+    T* getTail();
     DSLK(); //constructor
     ~DSLK();//destructor
     template <class U>
     bool insert(U &);//insert a member to the bottom
     template <class U>
     bool remove(U &);//find and remove a member
-    template <class U> 
-    T& update(U &);//update a member
     template <class U>
     T *find(U &);
-    void display();//display the list
+    template <class U>
+    U& find_id(const string&);
+    void display(const int&,const int&);//display the list
 };  
 
 #endif

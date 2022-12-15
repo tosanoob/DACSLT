@@ -3,6 +3,10 @@
 #include <iostream>
 using namespace std;
 
+void gotoxy(const int&, const int&);
+void clearLine();
+void clearScreen(const int&, const int&);
+
 class Menu{
     private:
         string* item; //ten cac menu
@@ -10,7 +14,7 @@ class Menu{
     public:
         Menu(int strnum, string a[]);
         ~Menu();
-        int CtrlMenu();
+        int ctrlMenu();
         void printMenu();
         void deleteMenu();
         int numberOfItem();

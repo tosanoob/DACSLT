@@ -1,7 +1,0 @@
-000001|Book No.1|Author No.1|2
-000002|Book No.2|Author No.2|2
-000003|Book No.3|Author No.3|2
-000004|Book No.4|Author No.4|2
-000005|Book No.5|Author No.5|2
-000006|Book No.6|Author No.6|2
-000007|Test again|Testing again|2

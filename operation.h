@@ -4,8 +4,9 @@
 #include <string>
 using namespace std;
 
-class operation_Handler {
-    string file_destination;
+class OperationHandler {
+    protected:
+    string fileDestination;
 
     public:
     virtual bool inputNew() = 0;
@@ -13,45 +14,41 @@ class operation_Handler {
     virtual bool removeExisted() = 0;
     virtual bool readFromFile() = 0;
     virtual bool writeToFile() = 0;
-    virtual void setDestination(string) = 0;
+    bool setDestination(const string&);
 };
 
-class library_Handler : public operation_Handler {
+class LibraryHandler : public OperationHandler {
     public:
-    library_Handler();
+    LibraryHandler();
     bool inputNew();
     bool updateExisted();
     bool removeExisted();
     bool readFromFile();
     bool writeToFile();
-    void setDestination(string);
-};
+} LH;
 
-class userbase_Handler : public operation_Handler {
+bool libraryDisplay();
+
+class UserbaseHandler : public OperationHandler {
     public:
-    userbase_Handler();
+    UserbaseHandler();
     bool inputNew();
     bool updateExisted();
     bool removeExisted();
     bool readFromFile();
     bool writeToFile();
-    void setDestination(string);
-};
+} UH;
 
-class operation_Handler_Creator {
-    public:
-    virtual operation_Handler* Creator() = 0;
+class BorrowingHandler : public OperationHandler {
+    public: 
+    BorrowingHandler();
+    bool inputNew();
+    bool updateExisted();
+    bool removeExisted();
+    bool readFromFile();
+    bool writeToFile();
+} BH;
 
-    int call_to_Handler_Creator() {
-        operation_Handler* current_handler = this->Creator();
-    }
-};
+OperationHandler* switcher(const int&);
 
-class library_Handler_Creator : public operation_Handler_Creator {
-    operation_Handler* Creator();
-};
-
-class userbase_Handler_Creator : public operation_Handler_Creator {
-    operation_Handler* Creator();
-};
 #endif

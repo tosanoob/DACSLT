@@ -6,21 +6,33 @@
 #include <windows.h>
 using namespace std;
 
-void gotoxy(int column, int line){
+void gotoxy(const int& column, const int& line){
     COORD coord;
     coord.X = column;
     coord.Y = line;
     SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-void clearline() {
+void clearLine() {
     gotoxy(0,0);
-    cout<<"                                                 ";
+    cout<<"                                                                         ";
     gotoxy(0,0);
 }
 
+void clearScreen(const int& width = 100, const int& height = 20) {
+    gotoxy(0,0);
+    string space;
+    for (int i =0;i<width;i++) {
+        space+=' ';
+    }
+    for (int i =0;i<height;i++) {
+        cout<<space<<'\n';
+    }
+    gotoxy(0,0);
+}   
+
 #define HOME gotoxy(0,0);
-#define CLEARLINE clearline();
+#define CLEARLINE clearLine();
 #define DOWN int(1)
 #define UP int(2)
 #define RIGHT int(3)
@@ -72,7 +84,7 @@ void Menu::deleteMenu(){
     }
 }
 
-int Menu:: CtrlMenu() {
+int Menu:: ctrlMenu() {
     int x;
     int line = 0;
     printMenu();
@@ -118,7 +130,7 @@ Menu::~Menu(){
     delete[] item;
 }
 
-void ShowConsoleCursor(bool showFlag)
+void showConsoleCursor(bool showFlag)
 {
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -133,11 +145,12 @@ void ShowConsoleCursor(bool showFlag)
 
 string mainMenuItem[4] = {"Thu vien sach", "Danh sach nguoi dung", "Muon tra sach", "Ket thuc"};
 Menu mainMenu(4,mainMenuItem);
-string sachMenuItem[4] = {"Them sach", "Xem/Sua thong tin sach", "Xoa sach", "Quay lai"};
-Menu sachMenu(4,sachMenuItem);
-string userMenuItem[4] = {"Them nguoi dung", "Xem/Sua thong tin nguoi dung", "Xoa nguoi dung", "Quay lai"};
-Menu userMenu(4,userMenuItem);
-string borrowMenuItem[4] = {"Muon sach", "Kiem tra thong tin muon sach", "Tra sach", "quay lai"};
+string sachMenuItem[5] = {"Tra cuu danh sach sach","Them sach", "Sua thong tin sach", "Xoa sach", "Quay lai"};
+Menu sachMenu(5,sachMenuItem);
+string userMenuItem[5] = {"Tra cuu danh sach nguoi dung", "Them nguoi dung", "Xem/Sua thong tin nguoi dung", "Xoa nguoi dung", "Quay lai"};
+Menu userMenu(5,userMenuItem);
+string borrowMenuItem[4] = { "Muon sach","Kiem tra thong tin muon sach", "Tra sach", "Quay lai"};
 Menu borrowMenu(4,borrowMenuItem);
-
+string borrowInfoMenuItem[3] = {"Thong tin sach","Thong tin nguoi dung", "Quay lai"};
+Menu borrowInfoMenu(3,borrowInfoMenuItem);
 #endif
