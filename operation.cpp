@@ -46,7 +46,25 @@ bool LibraryHandler::inputNew()
     cin >> newBook;
     string last_id = bookList.getTail()->getData().getID();
     newBook.setID(increment(last_id));
-    return bookList.insert(newBook);
+    switch (bookList.insert(newBook)) {
+        case 0: {
+            try {
+                Node<Sach>* temp = bookList.find(newBook);
+                temp->getData().append(newBook);
+                return 0;
+            } 
+            catch (int& exc) {
+                if (exc == MEMBER_NOTFOUND) cout<<"Khong tim thay sach??\n";
+                else cout<<"Loi khac?\n";
+                return 0;
+            }
+            catch (...) {
+                cout<<"Pointer to NULL\n";
+                return 0;
+            }
+        }
+        case 1: return 1;
+    }
     // neu them thanh cong tra ve 1, them that bai tra ve 0
 }
 

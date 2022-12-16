@@ -40,6 +40,11 @@ void Sach::borrowList() {
     }
 }
 
+void Sach:: append(const Sach& copy) {
+    if (tenSach == copy.tenSach && tenTacGia == copy.tenTacGia)
+    soBan += copy.soBan;
+}
+
 bool Sach::operator==(const Sach &comp)
 {
     if (tenSach != comp.tenSach)
