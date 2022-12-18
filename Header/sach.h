@@ -20,6 +20,7 @@ class Sach {
     bool operator == (const Sach&);
     void setID(const string&);
     string getID();
+    void append(const Sach&);
     void borrowList();
     DSLK<Node<User*>>& getList();
     ~Sach();

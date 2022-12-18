@@ -1,7 +1,7 @@
 #ifndef SACH_CPP
 #define SACH_CPP
 
-#include "sach.h"
+#include "../DACSLT3/Header/sach.h"
 #include "input_output.cpp"
 #include <iostream>
 using namespace std;
@@ -38,6 +38,11 @@ void Sach::borrowList() {
         cout<<*ptr<<'\n';
         temp=temp->toNext();
     }
+}
+
+void Sach:: append(const Sach& copy) {
+    if (tenSach == copy.tenSach && tenTacGia == copy.tenTacGia)
+    soBan += copy.soBan;
 }
 
 bool Sach::operator==(const Sach &comp)

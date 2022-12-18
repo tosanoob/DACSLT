@@ -1,7 +1,8 @@
 #include <iostream>
 #include <windows.h>
-#include "Menu.cpp"
 #include "operation.cpp"
+#include "Menu.cpp"
+
 
 int main()
 {
@@ -37,14 +38,12 @@ int main()
                 case 1:
                 {
                     std::cout << "Them sach\n";
-                    if (handler->inputNew()){
+                    if (handler->inputNew())
                         std::cout << "Them thanh cong\n";
-                        handler->writeToFile();
-                    }
                     else
-                        std::cout << "Da co sach voi thong tin tuong tu\n";
+                        std::cout << "Da co sach voi thong tin tuong tu, cap nhat them so ban sao\n";
+                    handler->writeToFile();
                     getch();
-
                     break;
                 }
                 case 2:

@@ -1,7 +1,7 @@
 #ifndef FUNCTION_CPP
 #define FUNCTION_CPP
 
-#include "friendfunction.h"
+#include "../DACSLT3/Header/friendfunction.h"
 #include "sach.cpp"
 #include "user.cpp"
 #include <iomanip>
