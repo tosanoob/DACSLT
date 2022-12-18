@@ -92,15 +92,17 @@ bool LibraryHandler::updateExisted()
 
 bool LibraryHandler::removeExisted()
 {
-    string target_id;
-    cin >> target_id;
+    string target_id;    
     try
-    {
+    {   
+        cout<<"Nhap ID sach muon xoa: ";
+        cin >> target_id;
         Sach &target = bookList.find_id<Sach>(target_id);
         cout << "Ban chac chan muon xoa sach sau?\n"
              << target << '\n';
         cout << "Nhap Y/N: ";
         char inp;
+        cin >> inp;
         switch (inp)
         {
         case 'Y':
@@ -220,11 +222,11 @@ UserbaseHandler::UserbaseHandler()
 }
 bool UserbaseHandler::inputNew()
 {
-    User newBook;
-    cin >> newBook;
+    User newUser;
+    cin >> newUser;
     string last_id = userList.getTail()->getData().getID();
-    newBook.setID(increment(last_id));
-    return userList.insert(newBook);
+    newUser.setID(increment(last_id));
+    return userList.insert(newUser);
 }
 bool UserbaseHandler::updateExisted()
 {
@@ -238,7 +240,6 @@ bool UserbaseHandler::updateExisted()
              << target << '\n';
         cout << "Nhap thong tin chinh sua\n";
         cin >> target;
-        cout << "Chinh sua thanh cong";
         return 1;
     }
     catch (int &exc)
@@ -251,14 +252,15 @@ bool UserbaseHandler::updateExisted()
 bool UserbaseHandler::removeExisted()
 {
     string target_id;
-    cin >> target_id;
     try
-    {
+    {   cout<<"Nhap ID nguoi dung muon xoa: ";
+        cin >> target_id;
         User &target = userList.find_id<User>(target_id);
         cout << "Ban chac chan muon xoa nguoi dung sau:\n"
              << target << '\n';
         cout << "Nhap Y/N: ";
         char inp;
+        cin >> inp;
         switch (inp)
         {
         case 'Y':
@@ -330,8 +332,6 @@ bool BorrowingHandler::updateExisted()
 {
     string target_id;
     // instead show borrowing information of a book/user:
-    do
-    {
         system("cls");
         int line = borrowInfoMenu.ctrlMenu();
         borrowInfoMenu.deleteMenu();
@@ -349,12 +349,13 @@ bool BorrowingHandler::updateExisted()
                 cout << target << '\n';
                 cout << "Danh sach nguoi dung dang muon sach:\n";
                 target.borrowList();
+                getch();
                 break;
             }
             catch (int &exc)
             {
                 cout << "Khong tim thay sach co ID " << target_id << '\n';
-                break;
+                return 0;
             }
         }
         case 1:
@@ -363,23 +364,24 @@ bool BorrowingHandler::updateExisted()
             {
                 cout << "Nhap ID nguoi dung: ";
                 cin >> target_id;
-                Sach &target = bookList.find_id<Sach>(target_id);
+                User &target = userList.find_id<User>(target_id);
                 cout << "Tim thay nguoi dung\n";
                 cout << target << '\n';
                 cout << "Danh sach sach nguoi dung nay dang muon:\n";
                 target.borrowList();
+                getch();
                 break;
             }
             catch (int &exc)
             {
                 cout << "Khong tim thay nguoi dung co ID " << target_id << '\n';
-                break;
+                return 0;
             }
         }
         case 2:
             return 1;
         }
-    } while (1);
+    return 1;
 }
 bool BorrowingHandler::removeExisted()
 {
